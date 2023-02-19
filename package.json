@@ -13,7 +13,7 @@
     "start": "cross-env NODE_ENV=production yarn ts-node ./server",
     "dev:server": "nodemon --watch server.ts --watch src/server --exec ts-node server.ts",
     "dev:client": "yarn build:client && vite --config vite.config.ts dev",
-    "build": "rimraf dist && yarn build:client && yarn build:server && yarn copy-files",
+    "build": "rm -rf dist && yarn build:client && yarn build:server && yarn copy-files",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --ssr src/client/entry-server.tsx --outDir dist/server",
     "test": "vitest",
