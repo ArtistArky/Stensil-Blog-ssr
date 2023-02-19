@@ -86,10 +86,10 @@ async function createServer(isProd = process.env.NODE_ENV === "production") {
       // 4. render the app HTML. This assumes entry-server.js's exported `render`
       //    function calls appropriate framework SSR APIs,
       //    e.g. ReactDOMServer.renderToString()
-      const { appHtml, data } = await render(url, subdomain[0]);
+      const { appHtml, actualData } = await render(url, subdomain[0]);
       const cssAssets = isProd ? "" : await stylesheets;
 
-      const { error, content } = data;
+      const { error, content } = actualData;
       console.log("error", error);
       console.log("authors", content);
       var html;
@@ -98,7 +98,7 @@ async function createServer(isProd = process.env.NODE_ENV === "production") {
       if(error !== null || content[0].length === 0) {
         html = template.replace(`<!--head-->`, cssAssets)
       }else {
-        const title = data.url === 'authors' ? toTitleCase(content[0].username.toString()) : content[0].title;
+        const title = actualData.url === 'authors' ? toTitleCase(content[0].username.toString()) : content[0].title;
         const description = content[0].description;
         const keywords = content[0].username + ', ' + content[0].username + ' blog, ' + content[0].username + ' blog posts' + ', ' + content[0].title + ' blog articles' + ', ' + content[0].title;
         const favicon = content[0].faviconimg;

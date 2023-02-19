@@ -48,15 +48,41 @@ const fetchPost = async (url: string) => {
   return { error: null, content: [contentData], url: 'posts' };
 };
 
+const fetchCat = async (url: string) => {
+  const catId = url.split("/category/")[1].split("/")[0];
+  
+  var currentCat:any = await supabaseClient.from("category").select(`name, posts, authors!inner(*)`).eq("title", catId);
+
+  if (currentCat.error) {
+    return { error: "Please check your internet connection & refresh the page", content: [], url: 'posts' };
+  }
+
+  const { name, posts, authors } = currentCat.data[0];
+
+  const contentData = { title: name, description: posts + ' posts', username: authors.username, logoimg: authors.logoimg, faviconimg: authors.faviconimg };
+
+  return { error: null, content: [contentData], url: 'posts' };
+};
+
 export async function render(url: string, subdomain: string) {
   console.log("Rendering", url, subdomain);
-  const data = url.search("/posts/") != -1 ? await fetchPost(url) : await fetchAuthor(subdomain);
+  const data = async () => {
+    if (url.search("/posts/") != -1) {
+      return await fetchPost(url);
+    } else if (url.search("/category/") != -1) {
+      return await fetchCat(url);
+    } else {
+      return await fetchAuthor(subdomain);
+    }
+  }
+
+  const actualData = await data();
 
   return { appHtml: ReactDOMServer.renderToString(
     <React.StrictMode>
       <StaticRouter location={url}>
-         <AppServer data={data} />
+         <AppServer data={actualData} />
       </StaticRouter>
-    </React.StrictMode>), data };
+    </React.StrictMode>), actualData };
 
 }
