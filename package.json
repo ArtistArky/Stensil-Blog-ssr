@@ -9,6 +9,7 @@
   "author": "JonLuca DeCaro",
   "license": "MIT",
   "scripts": {
+    "start": "cross-env NODE_ENV=production yarn ts-node ./server",
     "dev:server": "nodemon --watch server.ts --watch src/server --exec ts-node server.ts",
     "dev:client": "yarn build:client && vite --config vite.config.ts dev",
     "build": "rimraf dist && yarn build:client && yarn build:server && yarn copy-files",
