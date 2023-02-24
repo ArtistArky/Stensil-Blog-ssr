@@ -53,13 +53,13 @@ const ServerHeader: FC<HeadingProps> = ({
           isCenter ? "text-center w-full max-w-2xl mx-auto " : "max-w-2xl"
         }
       >
-        <h2 className={`text-3xl md:text-5xl font-semibold`}>
+        <h1 className={`text-3xl md:text-5xl font-semibold`}>
           {title}
-        </h2>
+        </h1>
         {desc && (
-          <span className="mt-2 md:mt-3 font-normal block text-base sm:text-xl text-neutral-500 dark:text-neutral-400">
+          <h2 className="mt-2 md:mt-3 font-normal block text-base sm:text-xl text-neutral-500 dark:text-neutral-400">
             {desc}
-          </span>
+          </h2>
         )}
       </div>
     </div>

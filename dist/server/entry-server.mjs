@@ -33,8 +33,8 @@ const ServerHeader = ({
         {
           className: isCenter ? "text-center w-full max-w-2xl mx-auto " : "max-w-2xl",
           children: [
-            /* @__PURE__ */ jsx("h2", { className: `text-3xl md:text-5xl font-semibold`, children: title }),
-            desc && /* @__PURE__ */ jsx("span", { className: "mt-2 md:mt-3 font-normal block text-base sm:text-xl text-neutral-500 dark:text-neutral-400", children: desc })
+            /* @__PURE__ */ jsx("h1", { className: `text-3xl md:text-5xl font-semibold`, children: title }),
+            desc && /* @__PURE__ */ jsx("h2", { className: "mt-2 md:mt-3 font-normal block text-base sm:text-xl text-neutral-500 dark:text-neutral-400", children: desc })
           ]
         }
       )

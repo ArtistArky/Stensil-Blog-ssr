@@ -61,7 +61,7 @@ async function createServer(isProd = process.env.NODE_ENV === "production") {
     );
   }
   const stylesheets = getStyleSheets();
-  app.set('subdomain offset', 1);
+  app.set('subdomain offset', 2);
 
   app.use("*", async (req: Request, res: Response, next: NextFunction) => {
     const url = req.originalUrl;
@@ -103,7 +103,7 @@ async function createServer(isProd = process.env.NODE_ENV === "production") {
         const keywords = content[0].username + ', ' + content[0].username + ' blog, ' + content[0].username + ' blog posts' + ', ' + content[0].title + ' blog articles' + ', ' + content[0].title;
         const favicon = content[0].faviconimg;
         
-        html = template.replace(`<!--app-html-->`, appHtml).replace(`<!--head-->`, cssAssets).replace(`<!--head-->`, cssAssets).replace(`Inkflow`, title).replace('/static/favicon-16x16.png', favicon).replace('description', description).replace('keywords', keywords);
+        html = template.replace(`<!--app-html-->`, appHtml).replace(`<!--head-->`, cssAssets).replace(`<!--head-->`, cssAssets).replace(`Inkflow`, title).replace('/static/favicon-16x16.png', favicon).replace('descriptionc', description).replace('keywordsc', keywords);
       }
       // 6. Send the rendered HTML back.
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
